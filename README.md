@@ -39,22 +39,3 @@ You can run jest unit tests from the server folder. Make sure MongoDB is started
 npm test
 ```
 Warning: You will need to reset the database after running.
-
-## Team Member 1 Contribution - Alvin
-- Design for navbar, sidebar, and welcome, login, registration, answers pages
-- Backend mongoose initialize script
-- Backend user and auth routes
-- Backend question routes
-- Backend comments routes
-- Backend tags routes
-- Backend answers routes
-- UML diagrams
-
-## Team Member 2 Contribution - Andrew
-- Document Schemas
-- Profile, Tag, Tag Question page
-- Question and answer components
-- New Question, answer, sort, page button functionality
-- Signup and Login functionality
-- Tag, Question, Answer edit and delete
-- Search backend and some answers/questions routes
