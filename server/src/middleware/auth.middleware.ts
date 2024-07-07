@@ -2,7 +2,6 @@ import { Response, NextFunction } from "express";
 import { jwtVerify } from "jose";
 import { UserIdJWTPayload } from "../../types/jose";
 import { AuthRequest } from "../../types/express";
-import { DEV_SECRET } from "../utils";
 
 export const verifyToken = async (
   req: AuthRequest,
@@ -18,7 +17,7 @@ export const verifyToken = async (
   try {
     const { payload } = await jwtVerify(
       token,
-      new TextEncoder().encode(DEV_SECRET),
+      new TextEncoder().encode(process.env.DEV_SECRET),
     );
     req.userId = (<UserIdJWTPayload>payload).userId;
     next();

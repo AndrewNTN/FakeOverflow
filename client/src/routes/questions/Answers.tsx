@@ -168,7 +168,7 @@ export default function Answers({ fromProfile }: { fromProfile?: boolean }) {
         {answers.length} {answers.length === 1 ? "Answer" : "Answers"}
       </h2>
       <FormError message={answerVoteError} />
-      <div className="flex flex-col gap-3 overflow-y-scroll max-h-[650px]">
+      <div className="flex flex-col gap-3 max-h-[650px]">
         <ul id="answer-list">
           {(() => {
             const renderedAnswers = [];

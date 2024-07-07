@@ -10,5 +10,3 @@ export const removeUndefinedKeys = <T extends object>(obj: T): Partial<T> => {
     Object.entries(obj).filter(([, value]) => value !== undefined),
   ) as Partial<T>;
 };
-
-export const DEV_SECRET = "REPLACE_LATER";

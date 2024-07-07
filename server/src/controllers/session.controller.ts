@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 import UserSchema from "../schema/user.schema";
 import bcrypt from "bcrypt";
 import { SignJWT } from "jose";
-import { DEV_SECRET, handleError } from "../utils";
+import { handleError } from "../utils";
 import { AuthRequest } from "../../types/express";
 
 /**
@@ -32,7 +32,7 @@ export const createSession = async (
       })
       .setIssuedAt()
       .setExpirationTime("1d")
-      .sign(new TextEncoder().encode(DEV_SECRET));
+      .sign(new TextEncoder().encode(process.env.DEV_SECRET));
 
     res.cookie("access_token", token, {
       httpOnly: true,

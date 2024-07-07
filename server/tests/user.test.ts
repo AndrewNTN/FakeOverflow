@@ -8,7 +8,6 @@ import QuestionSchema from "../src/schema/question.schema";
 import { SignJWT } from "jose";
 import AnswerSchema from "../src/schema/answer.schema";
 import CommentSchema from "../src/schema/comment.schema";
-import { DEV_SECRET } from "../src/utils";
 
 const TEST_DB_URI = "mongodb://localhost:27017/fake_so";
 
@@ -137,7 +136,7 @@ describe("User Routes", () => {
         isStaff: true,
       });
 
-      const secret = new TextEncoder().encode(DEV_SECRET);
+      const secret = new TextEncoder().encode(process.env.DEV_SECRET);
       const jwt = await new SignJWT({ userId: staffUser._id })
         .setProtectedHeader({ alg: "HS256" })
         .setIssuedAt()

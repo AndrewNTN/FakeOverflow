@@ -29,7 +29,7 @@ export default function QuestionList({
     return <h3 className="m-5 ml-9 text-xl">No Questions Found</h3>;
 
   return (
-    <ul className="overflow-y-scroll max-h-[800px]">
+    <ul className="max-h-[800px]">
       {(() => {
         const renderedQuestions = [];
         for (
