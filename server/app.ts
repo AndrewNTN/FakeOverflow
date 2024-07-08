@@ -30,8 +30,8 @@ app.use(
   }),
 );
 app.use(express.json());
-
-const clientBuildPath = path.join(__dirname, "..", "..", "client", "dist");
+console.log(__dirname);
+const clientBuildPath = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientBuildPath));
 
 app.get("*", (req, res) => {
