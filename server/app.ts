@@ -17,12 +17,14 @@ require("./src/schema/user.schema");
 require("./src/schema/question.schema");
 require("dotenv").config();
 
+const allowedOrigins = ["https://fake-overflow.onrender.com"];
+
 const app = express();
 
 app.use(cookieParser());
 app.use(
   cors<Request>({
-    origin: "http://localhost:3000",
+    origin: allowedOrigins,
     credentials: true,
   }),
 );
