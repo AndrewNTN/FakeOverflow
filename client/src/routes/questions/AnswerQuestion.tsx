@@ -57,9 +57,7 @@ export default function AnswerQuestion({ editing }: { editing?: boolean }) {
 
       if (editing) {
         try {
-          await axiosInstance.put(`/api/answers/${aid}`, newAnswer, {
-            withCredentials: true,
-          });
+          await axiosInstance.put(`/api/answers/${aid}`, newAnswer);
           navigate(`/questions/${qid}/${sluggify(question.title)}`);
         } catch (err) {
           if (axios.isAxiosError(err) && err.response)
@@ -67,9 +65,7 @@ export default function AnswerQuestion({ editing }: { editing?: boolean }) {
         }
       } else {
         axiosInstance
-          .post(`/api/questions/${qid}/answers`, newAnswer, {
-            withCredentials: true,
-          })
+          .post(`/api/questions/${qid}/answers`, newAnswer)
           .then((res) => {
             console.log(res.data);
             navigate(`/questions/${qid}/${sluggify(question.title)}`);

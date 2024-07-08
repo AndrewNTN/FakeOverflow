@@ -76,9 +76,7 @@ export default function Profile() {
 
   const handleQuestionDelete = (qid: string) => {
     axiosInstance
-      .delete(`/api/questions/${qid}`, {
-        withCredentials: true,
-      })
+      .delete(`/api/questions/${qid}`)
       .then(() => {
         setQuestions((prevQuestions) =>
           prevQuestions.filter((q) => q._id !== qid),
@@ -93,9 +91,7 @@ export default function Profile() {
       setDeleteUserWarning(`Are you sure you want to delete ${u.username}?`);
     } else {
       axiosInstance
-        .delete(`/api/users/${u._id}`, {
-          withCredentials: true,
-        })
+        .delete(`/api/users/${u._id}`)
         .then(() => {
           setUsers((prevUsers) => prevUsers.filter((pUser) => pUser !== u));
         })

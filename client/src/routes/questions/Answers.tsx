@@ -89,9 +89,7 @@ export default function Answers({ fromProfile }: { fromProfile?: boolean }) {
 
   const handleAnsDelete = async (answer: Answer): Promise<string> => {
     try {
-      await axiosInstance.delete(`/api/answers/${answer._id}`, {
-        withCredentials: true,
-      });
+      await axiosInstance.delete(`/api/answers/${answer._id}`);
       setAnswers((prevAnswers) =>
         prevAnswers.filter((a) => a._id !== answer._id),
       );
@@ -126,11 +124,9 @@ export default function Answers({ fromProfile }: { fromProfile?: boolean }) {
         setQuestionVoteError("Not enough reputation");
         return;
       }
-      await axiosInstance.post(
-        `/api/questions/${post._id}/votes`,
-        { vote: vote },
-        { withCredentials: true },
-      );
+      await axiosInstance.post(`/api/questions/${post._id}/votes`, {
+        vote: vote,
+      });
     } else {
       if (user && user.reputation < 50 && !user.isStaff) {
         setAnswerVoteError("Not enough reputation");
@@ -145,11 +141,9 @@ export default function Answers({ fromProfile }: { fromProfile?: boolean }) {
         ),
       );
 
-      await axiosInstance.post(
-        `/api/answers/${post._id}/votes`,
-        { vote: vote },
-        { withCredentials: true },
-      );
+      await axiosInstance.post(`/api/answers/${post._id}/votes`, {
+        vote: vote,
+      });
     }
   };
 

@@ -37,9 +37,7 @@ export default function Login() {
 
       // Verify login credentials and login
       axiosInstance
-        .post("/api/session", user, {
-          withCredentials: true,
-        })
+        .post("/api/session", user)
         .then(() => {
           navigate("/questions");
         })

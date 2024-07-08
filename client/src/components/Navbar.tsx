@@ -12,7 +12,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const logOut = () => {
-    axiosInstance.delete("/api/session", { withCredentials: true }).then(() => {
+    axiosInstance.delete("/api/session").then(() => {
       setCookies("access_token", "", {
         httpOnly: true,
         secure: true,

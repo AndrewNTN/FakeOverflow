@@ -40,13 +40,7 @@ export default function TagList({
   ): Promise<string> => {
     return new Promise((resolve, reject) => {
       axiosInstance
-        .put(
-          `/api/tags/${editTag?._id}`,
-          { name: editName },
-          {
-            withCredentials: true,
-          },
-        )
+        .put(`/api/tags/${editTag?._id}`, { name: editName })
         .then(() => {
           resolve("");
         })
@@ -62,9 +56,7 @@ export default function TagList({
     return new Promise((resolve, reject) => {
       setDeleteTag(t);
       axiosInstance
-        .delete(`/api/tags/${t._id}`, {
-          withCredentials: true,
-        })
+        .delete(`/api/tags/${t._id}`)
         .then(() => {
           setTags((prevTags) => prevTags.filter((tag) => tag !== t));
           resolve("");

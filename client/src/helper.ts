@@ -64,9 +64,7 @@ export const useAuthentication = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axiosInstance.get("/api/session", {
-          withCredentials: true,
-        });
+        const res = await axiosInstance.get("/api/session");
         if (res.data) {
           setLoggedIn(true);
           setUser(res.data);

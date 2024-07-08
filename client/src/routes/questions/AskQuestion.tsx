@@ -123,9 +123,7 @@ export default function AskQuestion({ editing }: { editing?: boolean }) {
 
       if (editing && auth) {
         axiosInstance
-          .put(`/api/questions/${id}`, newQuestion, {
-            withCredentials: true,
-          })
+          .put(`/api/questions/${id}`, newQuestion)
           .then((res) => {
             console.log(res.data);
             navigate("/questions");
@@ -135,9 +133,7 @@ export default function AskQuestion({ editing }: { editing?: boolean }) {
           });
       } else if (auth) {
         axiosInstance
-          .post("/api/questions/", newQuestion, {
-            withCredentials: true,
-          })
+          .post("/api/questions/", newQuestion)
           .then((res) => {
             console.log(res.data);
             navigate("/questions");
