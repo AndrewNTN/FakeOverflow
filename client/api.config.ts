@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "https://fake-overflow-site.onrender.com",
+  baseURL: "https://fake-overflow-api.onrender.com",
   withCredentials: true,
 });
 
