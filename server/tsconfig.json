@@ -12,8 +12,7 @@
     /* Type Checking */
     "strict": true,
     "skipLibCheck": true,
-    "typeRoots": ["./types", "./node_modules/@types"],
     "types": ["node"],
   },
-  "include": ["./**/*"]
+  "include": ["src/**/*"]
 }
