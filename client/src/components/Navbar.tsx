@@ -16,7 +16,7 @@ export default function Navbar() {
       setCookies("access_token", "", {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "none",
       });
       setLoggedIn(false);
       navigate("/");
