@@ -28,6 +28,6 @@
       "../server/types"
     ]
   },
-  "include": ["src", "../server/"],
+  "include": ["./**/.*{ts,tsx}"],
   "references": [{ "path": "./tsconfig.node.json" }],
 }
