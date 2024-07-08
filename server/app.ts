@@ -17,7 +17,7 @@ require("./src/schema/user.schema");
 require("./src/schema/question.schema");
 require("dotenv").config();
 
-const allowedOrigins = ["https://fake-overflow.onrender.com"];
+const allowedOrigins = ["https://fake-overflow-qt7k.onrender.com"];
 
 const app = express();
 
