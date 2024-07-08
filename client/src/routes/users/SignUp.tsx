@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import FormError from "@/components/FormError.tsx";
-import axios from "axios";
+import axiosInstance from "../../../api.config.ts";
 import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
@@ -67,8 +67,8 @@ export default function SignUp() {
       };
 
       // Add to database and handle if non-unique email
-      axios
-        .post("http://localhost:8000/api/users", newUser)
+      axiosInstance
+        .post("/api/users", newUser)
         .then(() => {
           navigate("/users/login");
         })

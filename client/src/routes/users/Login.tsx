@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import FormError from "@/components/FormError.tsx";
-import axios from "axios";
+import axiosInstance from "../../../api.config.ts";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -36,8 +36,8 @@ export default function Login() {
       };
 
       // Verify login credentials and login
-      axios
-        .post("http://localhost:8000/api/session", user, {
+      axiosInstance
+        .post("/api/session", user, {
           withCredentials: true,
         })
         .then(() => {

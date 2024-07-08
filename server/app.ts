@@ -15,6 +15,7 @@ require("./src/schema/comment.schema");
 require("./src/schema/answer.schema");
 require("./src/schema/user.schema");
 require("./src/schema/question.schema");
+require("dotenv").config();
 
 const app = express();
 
@@ -27,7 +28,9 @@ app.use(
 );
 app.use(express.json());
 
-mongoose.connect("mongodb://localhost:27017/fake_so").catch((err) => {
+const mongoURI = process.env.MONGO_URI || "";
+
+mongoose.connect(mongoURI).catch((err) => {
   console.error(err);
   process.exit(1);
 });

@@ -2,7 +2,7 @@ import { useAuthentication } from "@/helper.ts";
 import Comment from "@server/types/comment";
 import { FormEvent, useEffect, useState } from "react";
 import FormError from "@/components/FormError.tsx";
-import axios from "axios";
+import axiosInstance from "../../../api.config.ts";
 import CommentComponent from "@/components/questions/CommentComponent.tsx";
 
 export default function Comments({
@@ -55,14 +55,10 @@ export default function Comments({
         text: commentText,
       };
       if (from && id) {
-        axios
-          .post(
-            `http://localhost:8000/api/${from}/${id}/comments`,
-            newComment,
-            {
-              withCredentials: true,
-            },
-          )
+        axiosInstance
+          .post(`/api/${from}/${id}/comments`, newComment, {
+            withCredentials: true,
+          })
           .then((res) => {
             setComments((prevComments) => [...prevComments, res.data]);
             if (newCommentCallback) newCommentCallback(res.data);
@@ -76,12 +72,8 @@ export default function Comments({
   };
 
   const handleUpvote = (comment: Comment) => {
-    axios
-      .post(
-        `http://localhost:8000/api/comments/${comment._id}/votes`,
-        {},
-        { withCredentials: true },
-      )
+    axiosInstance
+      .post(`/api/comments/${comment._id}/votes`, {}, { withCredentials: true })
       .then(() => {})
       .catch((err) => setCommentError(err.response.data.message));
     if (voteCallback) voteCallback(comment);

@@ -2,7 +2,7 @@ import ContentHeader from "@/components/ContentHeader.tsx";
 import QuestionList from "@/components/questions/QuestionList.tsx";
 import { useState, useEffect } from "react";
 import PageButtons from "@/components/PageButtons.tsx";
-import axios from "axios";
+import axiosInstance from "../../../api.config.ts";
 import Question from "@server/types/question";
 import { useParams, useSearchParams } from "react-router-dom";
 
@@ -18,8 +18,8 @@ export default function Questions() {
 
   useEffect(() => {
     if (tag) {
-      axios
-        .get(`http://localhost:8000/api/tags/${tag}/questions`)
+      axiosInstance
+        .get(`/api/tags/${tag}/questions`)
         .then((res) => {
           setQuestions(res.data);
         })
@@ -27,8 +27,8 @@ export default function Questions() {
           console.log("Error fetching questions:", err);
         });
     } else {
-      axios
-        .get(`http://localhost:8000/api/questions?search=${query}`)
+      axiosInstance
+        .get(`/api/questions?search=${query}`)
         .then((res) => {
           setQuestions(res.data);
         })

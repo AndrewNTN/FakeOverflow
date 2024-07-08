@@ -6,12 +6,15 @@ import QuestionSchema from "./src/schema/question.schema";
 import AnswerSchema from "./src/schema/answer.schema";
 import CommentSchema from "./src/schema/comment.schema";
 
+require("dotenv").config();
+
 const userArgs = process.argv.slice(2);
 const [adminUsername, adminPassword] = userArgs;
+const mongoURI = process.env.MONGO_URI || "";
 
 async function initDatabase() {
   try {
-    await mongoose.connect("mongodb://localhost:27017/fake_so");
+    await mongoose.connect(mongoURI);
     console.log("Connected to MongoDB");
 
     // Create initial data

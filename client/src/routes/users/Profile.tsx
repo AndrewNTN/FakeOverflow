@@ -4,7 +4,7 @@ import TagList from "@/components/TagList.tsx";
 import QuestionList from "@/components/questions/QuestionList.tsx";
 import { IconEdit, IconX } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../../api.config.ts";
 import User from "@server/types/user";
 import Question from "@server/types/question";
 import Tag from "@server/types/tag";
@@ -24,8 +24,8 @@ export default function Profile() {
 
   useEffect(() => {
     // Get profile user
-    axios
-      .get(`http://localhost:8000/api/users/${id}`)
+    axiosInstance
+      .get(`/api/users/${id}`)
       .then((res) => {
         setProfileUser(res.data);
       })
@@ -34,8 +34,8 @@ export default function Profile() {
       });
 
     // Get all users
-    axios
-      .get("http://localhost:8000/api/users/")
+    axiosInstance
+      .get("/api/users/")
       .then((res) => {
         setUsers(res.data);
       })
@@ -44,8 +44,8 @@ export default function Profile() {
       });
 
     // Get questions posted by user
-    axios
-      .get(`http://localhost:8000/api/users/${id}/questions`)
+    axiosInstance
+      .get(`/api/users/${id}/questions`)
       .then((res) => {
         setQuestions(res.data);
       })
@@ -54,8 +54,8 @@ export default function Profile() {
       });
 
     // Get tags created by user
-    axios
-      .get(`http://localhost:8000/api/users/${id}/tags`)
+    axiosInstance
+      .get(`/api/users/${id}/tags`)
       .then((res) => {
         setUserTags(res.data);
       })
@@ -64,8 +64,8 @@ export default function Profile() {
       });
 
     // Get questions answered by user
-    axios
-      .get(`http://localhost:8000/api/users/${id}/questions/answered`)
+    axiosInstance
+      .get(`/api/users/${id}/questions/answered`)
       .then((res) => {
         setAnsweredQuestions(res.data);
       })
@@ -75,8 +75,8 @@ export default function Profile() {
   }, [id]);
 
   const handleQuestionDelete = (qid: string) => {
-    axios
-      .delete(`http://localhost:8000/api/questions/${qid}`, {
+    axiosInstance
+      .delete(`/api/questions/${qid}`, {
         withCredentials: true,
       })
       .then(() => {
@@ -92,8 +92,8 @@ export default function Profile() {
       setUserToBeDeleted(u);
       setDeleteUserWarning(`Are you sure you want to delete ${u.username}?`);
     } else {
-      axios
-        .delete(`http://localhost:8000/api/users/${u._id}`, {
+      axiosInstance
+        .delete(`/api/users/${u._id}`, {
           withCredentials: true,
         })
         .then(() => {

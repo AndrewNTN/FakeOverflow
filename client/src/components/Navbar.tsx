@@ -3,7 +3,7 @@ import { IconBrandStackoverflow, IconSearch } from "@tabler/icons-react";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useAuthentication } from "@/helper.ts";
 import { useCookies } from "react-cookie";
-import axios from "axios";
+import axiosInstance from "../../api.config.ts";
 
 export default function Navbar() {
   const { user, loggedIn, setLoggedIn } = useAuthentication();
@@ -12,17 +12,15 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const logOut = () => {
-    axios
-      .delete("http://localhost:8000/api/session", { withCredentials: true })
-      .then(() => {
-        setCookies("access_token", "", {
-          httpOnly: true,
-          secure: true,
-          sameSite: "strict",
-        });
-        setLoggedIn(false);
-        navigate("/");
+    axiosInstance.delete("/api/session", { withCredentials: true }).then(() => {
+      setCookies("access_token", "", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
       });
+      setLoggedIn(false);
+      navigate("/");
+    });
   };
 
   useEffect(() => {
