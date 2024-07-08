@@ -2,6 +2,7 @@ import FormError from "@/components/FormError.tsx";
 import { FormEvent, useState, useEffect } from "react";
 import { sluggify, validateHyperlinks } from "@/helper";
 import { useNavigate, useParams } from "react-router-dom";
+import axiosInstance from "../../../api.config.ts";
 import axios from "axios";
 import Question from "@server/types/question";
 
@@ -15,7 +16,7 @@ export default function AnswerQuestion({ editing }: { editing?: boolean }) {
   const { aid, qid } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/questions/${qid}`).then((res) => {
+    axiosInstance.get(`/api/questions/${qid}`).then((res) => {
       setQuestion(res.data);
     });
   }, [qid]);
@@ -23,7 +24,7 @@ export default function AnswerQuestion({ editing }: { editing?: boolean }) {
   // if editing an answer, load in data
   useEffect(() => {
     if (editing) {
-      axios.get(`http://localhost:8000/api/answers/${aid}`).then((res) => {
+      axiosInstance.get(`/api/answers/${aid}`).then((res) => {
         setText(res.data.text);
       });
     }
@@ -56,27 +57,19 @@ export default function AnswerQuestion({ editing }: { editing?: boolean }) {
 
       if (editing) {
         try {
-          await axios.put(
-            `http://localhost:8000/api/answers/${aid}`,
-            newAnswer,
-            {
-              withCredentials: true,
-            },
-          );
+          await axiosInstance.put(`/api/answers/${aid}`, newAnswer, {
+            withCredentials: true,
+          });
           navigate(`/questions/${qid}/${sluggify(question.title)}`);
         } catch (err) {
           if (axios.isAxiosError(err) && err.response)
             setFormError(err.response.data.message);
         }
       } else {
-        axios
-          .post(
-            `http://localhost:8000/api/questions/${qid}/answers`,
-            newAnswer,
-            {
-              withCredentials: true,
-            },
-          )
+        axiosInstance
+          .post(`/api/questions/${qid}/answers`, newAnswer, {
+            withCredentials: true,
+          })
           .then((res) => {
             console.log(res.data);
             navigate(`/questions/${qid}/${sluggify(question.title)}`);

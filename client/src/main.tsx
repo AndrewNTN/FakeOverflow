@@ -14,6 +14,9 @@ import Profile from "@/routes/users/Profile.tsx";
 import Answers from "@/routes/questions/Answers.tsx";
 import AuthRoute from "@/components/AuthRoute.tsx";
 import AnswerQuestion from "@/routes/questions/AnswerQuestion.tsx";
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
+
+if (process.env.NODE_ENV === "production") disableReactDevTools();
 
 const router = createBrowserRouter([
   {

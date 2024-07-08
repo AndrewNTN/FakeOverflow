@@ -2,7 +2,7 @@ import FormError from "@/components/FormError.tsx";
 import { FormEvent, useState, useEffect } from "react";
 import { useAuthentication, validateHyperlinks } from "@/helper";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+import axiosInstance from "../../../api.config.ts";
 import Tag from "@server/types/tag";
 
 export default function AskQuestion({ editing }: { editing?: boolean }) {
@@ -16,7 +16,7 @@ export default function AskQuestion({ editing }: { editing?: boolean }) {
   // if editing a question, load in data
   useEffect(() => {
     if (editing) {
-      axios.get(`http://localhost:8000/api/questions/${id}`).then((res) => {
+      axiosInstance.get(`/api/questions/${id}`).then((res) => {
         setTitle(res.data.title);
         setText(res.data.text);
         setTags(res.data.tags.map((tag: Tag) => tag.name).join(" "));
@@ -98,7 +98,7 @@ export default function AskQuestion({ editing }: { editing?: boolean }) {
 
       let auth = true;
       try {
-        const res = await axios.get("http://localhost:8000/api/tags");
+        const res = await axiosInstance.get("/api/tags");
         const existingTags = res.data;
         const newTags = newQuestion.tags.filter(
           (tag) =>
@@ -122,8 +122,8 @@ export default function AskQuestion({ editing }: { editing?: boolean }) {
       }
 
       if (editing && auth) {
-        axios
-          .put(`http://localhost:8000/api/questions/${id}`, newQuestion, {
+        axiosInstance
+          .put(`/api/questions/${id}`, newQuestion, {
             withCredentials: true,
           })
           .then((res) => {
@@ -134,8 +134,8 @@ export default function AskQuestion({ editing }: { editing?: boolean }) {
             setFormError(err.response.request.statusText);
           });
       } else if (auth) {
-        axios
-          .post("http://localhost:8000/api/questions/", newQuestion, {
+        axiosInstance
+          .post("/api/questions/", newQuestion, {
             withCredentials: true,
           })
           .then((res) => {

@@ -12,6 +12,7 @@ import Answer from "@server/types/answer";
 import Question from "@server/types/question";
 import Comment from "@server/types/comment";
 import FormError from "@/components/FormError.tsx";
+import axiosInstance from "../../../api.config.ts";
 import axios from "axios";
 import AnswerPostComponent from "@/components/AnswerPostComponent.tsx";
 
@@ -40,8 +41,8 @@ export default function Answers({ fromProfile }: { fromProfile?: boolean }) {
   }, [searchParams]);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8000/api/questions/${qid}`)
+    axiosInstance
+      .get(`/api/questions/${qid}`)
       .then((res) => {
         setQuestion(res.data);
       })
@@ -88,7 +89,7 @@ export default function Answers({ fromProfile }: { fromProfile?: boolean }) {
 
   const handleAnsDelete = async (answer: Answer): Promise<string> => {
     try {
-      await axios.delete(`http://localhost:8000/api/answers/${answer._id}`, {
+      await axiosInstance.delete(`/api/answers/${answer._id}`, {
         withCredentials: true,
       });
       setAnswers((prevAnswers) =>
@@ -125,8 +126,8 @@ export default function Answers({ fromProfile }: { fromProfile?: boolean }) {
         setQuestionVoteError("Not enough reputation");
         return;
       }
-      await axios.post(
-        `http://localhost:8000/api/questions/${post._id}/votes`,
+      await axiosInstance.post(
+        `/api/questions/${post._id}/votes`,
         { vote: vote },
         { withCredentials: true },
       );
@@ -144,8 +145,8 @@ export default function Answers({ fromProfile }: { fromProfile?: boolean }) {
         ),
       );
 
-      await axios.post(
-        `http://localhost:8000/api/answers/${post._id}/votes`,
+      await axiosInstance.post(
+        `/api/answers/${post._id}/votes`,
         { vote: vote },
         { withCredentials: true },
       );

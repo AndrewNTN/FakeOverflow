@@ -1,6 +1,6 @@
 import Tag from "@server/types/tag";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axiosInstance from "../../api.config.ts";
 import Question from "@server/types/question";
 import TagComponent from "@/components/TagComponent.tsx";
 
@@ -25,9 +25,7 @@ export default function TagList({
     const fetchTagQuestions = async () => {
       const tagQuestionsData: TagQuestionsMap = {};
       for (const tag of tags) {
-        const res = await axios.get(
-          `http://localhost:8000/api/tags/${tag.name}/questions`,
-        );
+        const res = await axiosInstance.get(`/api/tags/${tag.name}/questions`);
         tagQuestionsData[tag.name] = res.data;
       }
       setTagQuestions(tagQuestionsData);
@@ -41,9 +39,9 @@ export default function TagList({
     editTag: Tag,
   ): Promise<string> => {
     return new Promise((resolve, reject) => {
-      axios
+      axiosInstance
         .put(
-          `http://localhost:8000/api/tags/${editTag?._id}`,
+          `/api/tags/${editTag?._id}`,
           { name: editName },
           {
             withCredentials: true,
@@ -63,8 +61,8 @@ export default function TagList({
   const handleTagDelete = (t: Tag): Promise<string> => {
     return new Promise((resolve, reject) => {
       setDeleteTag(t);
-      axios
-        .delete(`http://localhost:8000/api/tags/${t._id}`, {
+      axiosInstance
+        .delete(`/api/tags/${t._id}`, {
           withCredentials: true,
         })
         .then(() => {

@@ -1,6 +1,6 @@
 import ContentHeader from "@/components/ContentHeader.tsx";
 import TagList from "@/components/TagList.tsx";
-import axios from "axios";
+import axiosInstance from "../../api.config.ts";
 import { useEffect, useState } from "react";
 import Tag from "@server/types/tag";
 
@@ -8,7 +8,7 @@ export default function Tags() {
   const [tags, setTags] = useState<Tag[]>([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/tags").then((res) => {
+    axiosInstance.get("/api/tags").then((res) => {
       setTags(res.data);
     });
   }, []);

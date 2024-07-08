@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axiosInstance from "../api.config.ts";
 import User from "@server/types/user";
 
 export const timeSinceDate = (dateString: Date) => {
@@ -64,7 +64,7 @@ export const useAuthentication = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await axios.get("http://localhost:8000/api/session", {
+        const res = await axiosInstance.get("/api/session", {
           withCredentials: true,
         });
         if (res.data) {
