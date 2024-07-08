@@ -11,7 +11,7 @@ import CommentSchema from "../schema/comment.schema";
 import { findOrphanTags } from "../utils/tag";
 
 // GET /api/users/
-export const getAllUsers = async (req: Request, res: Response) => {
+export const getAllUsers = async (_req: Request, res: Response) => {
   try {
     const users = await UserSchema.find({}, { password: 0 });
     res.json(users);
