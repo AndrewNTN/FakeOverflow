@@ -17,10 +17,18 @@ require("./src/schema/user.schema");
 require("./src/schema/question.schema");
 require("dotenv").config();
 
+const allowedOrigins = ["https://fake-overflow-site.onrender.com"];
+
 const app = express();
 const path = require("path");
 
 app.use(cookieParser());
+app.use(
+  cors<Request>({
+    origin: allowedOrigins,
+    credentials: true,
+  }),
+);
 app.use(express.json());
 const clientBuildPath = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientBuildPath));
