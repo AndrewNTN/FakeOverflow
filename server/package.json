@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "test": "jest",
-    "start": "node --import tsx server.ts",
+    "start": "tsx server.ts",
     "dev": "tsx watch server.ts",
     "init": "tsx init.ts",
     "lint": "eslint ."
