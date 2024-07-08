@@ -37,7 +37,7 @@ export const createSession = async (
     res.cookie("access_token", token, {
       httpOnly: true,
       secure: true,
-      sameSite: "strict",
+      sameSite: "none",
     });
     res.status(200).json({ message: "Login Successful" });
   } catch (err) {
@@ -58,7 +58,7 @@ export const deleteSession = async (_req: AuthRequest, res: Response) => {
   res.clearCookie("access_token", {
     httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
   });
   res.json({ message: "Logout successful" });
 };
