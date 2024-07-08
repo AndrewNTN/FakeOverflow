@@ -20,6 +20,7 @@ require("dotenv").config();
 const allowedOrigins = ["https://fake-overflow-site.onrender.com"];
 
 const app = express();
+const path = require("path");
 
 app.use(cookieParser());
 app.use(
@@ -29,6 +30,11 @@ app.use(
   }),
 );
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
 
 const mongoURI = process.env.MONGO_URI || "";
 
