@@ -30,10 +30,9 @@ app.use(
   }),
 );
 app.use(express.json());
-console.log(__dirname);
 const clientBuildPath = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientBuildPath));
-
+console.log(clientBuildPath);
 app.get("*", (req, res) => {
   res.sendFile(path.join(clientBuildPath, "index.html"));
 });
