@@ -56,9 +56,7 @@ export default function Comments({
       };
       if (from && id) {
         axiosInstance
-          .post(`/api/${from}/${id}/comments`, newComment, {
-            withCredentials: true,
-          })
+          .post(`/api/${from}/${id}/comments`, newComment)
           .then((res) => {
             setComments((prevComments) => [...prevComments, res.data]);
             if (newCommentCallback) newCommentCallback(res.data);
@@ -73,7 +71,7 @@ export default function Comments({
 
   const handleUpvote = (comment: Comment) => {
     axiosInstance
-      .post(`/api/comments/${comment._id}/votes`, {}, { withCredentials: true })
+      .post(`/api/comments/${comment._id}/votes`, {})
       .then(() => {})
       .catch((err) => setCommentError(err.response.data.message));
     if (voteCallback) voteCallback(comment);
