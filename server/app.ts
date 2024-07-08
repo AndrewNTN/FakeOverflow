@@ -1,8 +1,6 @@
 import express from "express";
-import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
-import { Request } from "express";
 import userRoute from "./src/routes/user.route";
 import sessionRoute from "./src/routes/session.route";
 import questionRoute from "./src/routes/question.route";
@@ -17,18 +15,10 @@ require("./src/schema/user.schema");
 require("./src/schema/question.schema");
 require("dotenv").config();
 
-const allowedOrigins = ["https://fake-overflow-site.onrender.com"];
-
 const app = express();
 const path = require("path");
 
 app.use(cookieParser());
-app.use(
-  cors<Request>({
-    origin: allowedOrigins,
-    credentials: true,
-  }),
-);
 app.use(express.json());
 const clientBuildPath = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientBuildPath));
