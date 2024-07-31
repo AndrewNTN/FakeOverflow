@@ -1,5 +1,4 @@
-App is hosted at https://fake-overflow-site.onrender.com/
-! Might take a few minutes for the server to function because of render free tier limitations.
+App is hosted at https://fake-overflow-site.onrender.com/. Might take a few minutes for the server to function because of render free tier limitations.
 
 ## Instructions to set up and run project locally
 ### Frontend
